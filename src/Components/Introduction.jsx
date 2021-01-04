@@ -33,7 +33,7 @@ function Introduction() {
                         <li>Find the path from the home point to the destination using any of the<br /> following algorithms:
                             <ul>
                                 <li><b>Breadth-First Search (BFS):</b> an <b>unweighted</b> algorithm that<br />&emsp; guarantees optimality</li>
-                                <li><b>Depth-First Search )DFS):</b> a very inefficient, <b>unweighted</b><br />&emsp; algorithm</li>
+                                <li><b>Depth-First Search (DFS):</b> a very inefficient, <b>unweighted</b><br />&emsp; algorithm</li>
                                 <li><b>Dijkstra's Algorithm:</b> a <b>weighted</b> algorithm that<br />&emsp; guarantees optimality</li>
                                 <li><b>A*:</b> an improvement upon Dijkstra's Algorithm</li>
                             </ul>
@@ -41,7 +41,7 @@ function Introduction() {
                         <li>Clear the displayed path, walls, or weights using the "Clear" dropdown<br />&emsp; at the top of the page</li>
                     </ol>
                 </div>
-                <p>If you'd like to, you can check out the source code for this site at my <a href="https://www.google.com" target="_blank">github</a>.</p>
+                <p>If you'd like to, you can check out the source code for this site at my <a href="https://github.com/vironaray/navpath" target="_blank">github</a>.</p>
                 <p>Now that you're up to speed, <b>LET'S FIND SOME PATHS!!!</b></p>
             </div>
         </div>
