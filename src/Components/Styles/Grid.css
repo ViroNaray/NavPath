@@ -21,7 +21,7 @@
     align-items: center;
     width: fit-content;
 
-    width: 95vw;
+    /* width: 95vw; */
     overflow-x: scroll;
     overflow-y: scroll;
     max-height: 70vh;
@@ -29,5 +29,5 @@
 
 .row {
     height: 25px;
-    width: 1377px; /* (Node-width * numNodes) + edge outline */
+    width: 1322px; /* (Node-width * numNodes) + edge outline */
 }
