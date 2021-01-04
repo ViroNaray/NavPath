@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/NavPath/static/css/main.f261d138.chunk.css",
+    "main.css": "/NavPath/static/css/main.490bf421.chunk.css",
     "main.js": "/NavPath/static/js/main.6baf8faf.chunk.js",
     "main.js.map": "/NavPath/static/js/main.6baf8faf.chunk.js.map",
     "runtime-main.js": "/NavPath/static/js/runtime-main.f1c23b59.js",
@@ -10,14 +10,14 @@
     "static/js/3.7fae3d5a.chunk.js": "/NavPath/static/js/3.7fae3d5a.chunk.js",
     "static/js/3.7fae3d5a.chunk.js.map": "/NavPath/static/js/3.7fae3d5a.chunk.js.map",
     "index.html": "/NavPath/index.html",
-    "static/css/main.f261d138.chunk.css.map": "/NavPath/static/css/main.f261d138.chunk.css.map",
+    "static/css/main.490bf421.chunk.css.map": "/NavPath/static/css/main.490bf421.chunk.css.map",
     "static/js/2.bc1c0e38.chunk.js.LICENSE.txt": "/NavPath/static/js/2.bc1c0e38.chunk.js.LICENSE.txt",
     "static/media/GridKey.css": "/NavPath/static/media/weight.2e4bdffd.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.f1c23b59.js",
     "static/js/2.bc1c0e38.chunk.js",
-    "static/css/main.f261d138.chunk.css",
+    "static/css/main.490bf421.chunk.css",
     "static/js/main.6baf8faf.chunk.js"
   ]
 }
