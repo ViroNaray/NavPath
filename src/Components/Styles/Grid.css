@@ -1,0 +1,33 @@
+
+.gridContainer {
+    /* margin: 0px auto;
+    display: inline;
+    width: 100%; */
+
+    padding: 10px;
+    position: fixed;
+    top: 30%;
+    left: 0.5vw;
+    right: 0.5vw;
+    bottom: 0.5vw;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.grid {
+    padding: 10px;
+
+    margin: auto;
+    align-items: center;
+    width: fit-content;
+
+    width: 95vw;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    max-height: 70vh;
+}
+
+.row {
+    height: 25px;
+    width: 1377px; /* (Node-width * numNodes) + edge outline */
+}

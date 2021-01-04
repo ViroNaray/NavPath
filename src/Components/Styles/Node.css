@@ -1,0 +1,158 @@
+
+.node {
+    width: 24px;
+    height: 24px;
+    outline: 1px solid rgb(241, 165, 93);
+    background-color: white;
+    display: inline-block;
+}
+
+.node-wall {
+    outline: 1px solid rgb(12, 53, 71);
+    background-color: rgb(12, 53, 71);
+
+    animation-name: obstacleAnimation;
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.node-weight {
+    background-image: url("./Images/weight.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    animation-name: obstacleAnimation;
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes obstacleAnimation {
+    0% {
+        transform: scale(0.3);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.node-discovered {
+    background-color: rgb(79, 148, 238);
+    
+    animation-name: discoveredAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+  
+@keyframes discoveredAnimation {
+    0% {
+        transform: scale(0.3);
+        background-color: rgba(0, 0, 66, 0.75);
+        border-radius: 100%;
+    }
+
+    50% {
+        background-color: rgb(17, 104, 217);
+    }
+
+    75% {
+        transform: scale(1.1);
+        background-color: rgb(43, 128, 238);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.node-path {
+    background-color: yellow;
+}
+
+.node-home {
+    background-image: url("./Images/home.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    animation-name: endpointAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.node-dest {
+    background-image: url("./Images/target.png");
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+
+    animation-name: endpointAnimation;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes endpointAnimation {
+    0% {
+        transform: scale(0.3);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* The following make sure to show the discovered animation regardless of node type */
+.node-discovered.node-weight {
+    animation-name: discoveredAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.node-discovered.node-home {
+    animation-name: discoveredAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.node-discovered.node-dest {
+    animation-name: discoveredAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
