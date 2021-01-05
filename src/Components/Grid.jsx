@@ -61,8 +61,6 @@ class Grid extends Component {
 
         // Get the new click settings and toggle
         // The new setting is the opposite of whatever the current click mode property is for the clicked node
-
-        //const newWallSetting = !this.state.grid[row][col].isWall;
         let newClickSetting;
         if (this.state.clickSettingIsWall)
             newClickSetting = !this.state.grid[row][col].isWall;

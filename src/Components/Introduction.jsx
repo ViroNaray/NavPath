@@ -41,7 +41,7 @@ function Introduction() {
                         <li>Clear the displayed path, walls, or weights using the "Clear" dropdown<br />&emsp; at the top of the page</li>
                     </ol>
                 </div>
-                <p>If you'd like to, you can check out the source code for this site at my <a href="https://github.com/vironaray/navpath" target="_blank">github</a>.</p>
+                <p>If you'd like to, you can check out the source code for this site at my <a href="https://github.com/vironaray/navpath" target="_blank" rel="noreferrer">github</a>.</p>
                 <p>Now that you're up to speed, <b>LET'S FIND SOME PATHS!!!</b></p>
             </div>
         </div>
