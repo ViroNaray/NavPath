@@ -108,6 +108,7 @@ class Grid extends Component {
         this.setState({ mouseIsPressed: false });
     }
 
+
     // 0 - BFS
     // 1 - DFS
     // 2 - Dijkstra
@@ -152,6 +153,7 @@ class Grid extends Component {
 
     }
 
+
     animate(nodesDiscoveredInOrder) {
         for (let i = 0; i < nodesDiscoveredInOrder.length; i++) {
             setTimeout(() => {
@@ -164,6 +166,7 @@ class Grid extends Component {
             this.animatePath();
         }, 6 * nodesDiscoveredInOrder.length);
     }
+
 
     animatePath() {
         const path = backtrackPath(this.state.grid[this.state.destCoords[0]][this.state.destCoords[1]]);
