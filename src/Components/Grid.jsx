@@ -28,7 +28,7 @@ class Grid extends Component {
             movingEndpoints: false, // Only set on mouse down
             movingHome: false,
             homeCoords: [10, 10],
-            destCoords: [10, 44],
+            destCoords: [10, 11], //44
             isSolving: false,
             isSolved: false
         };
@@ -80,18 +80,16 @@ class Grid extends Component {
         }
         // Check if we are moving either the Home point or the Destination
         else if (this.state.movingEndpoints) {
-            let coords;
+            let updatedCoords;
             let updatedGrid;
 
             if (this.state.movingHome) {
-                coords = this.state.homeCoords;
-                [updatedGrid, coords] = changeEndpointLocation(this.state.grid, row, col, coords, true);
-                this.setState({ grid: updatedGrid, homeCoords: coords });
+                [updatedGrid, updatedCoords] = changeEndpointLocation(this.state.grid, this.state.homeCoords, this.state.destCoords, row, col, true);
+                this.setState({ grid: updatedGrid, homeCoords: updatedCoords });
             }
             else {
-                coords = this.state.destCoords;
-                [updatedGrid, coords] = changeEndpointLocation(this.state.grid, row, col, coords, false);
-                this.setState({ grid: updatedGrid, destCoords: coords });
+                [updatedGrid, updatedCoords] = changeEndpointLocation(this.state.grid, this.state.homeCoords, this.state.destCoords, row, col, false);
+                this.setState({ grid: updatedGrid, destCoords: updatedCoords });
             }
 
             return;
@@ -294,19 +292,24 @@ const toggleNodeType = (oldGrid, row, col, clickSettingOn, clickSettingIsWall, w
 }
 
 
-const changeEndpointLocation = (oldGrid, row, col, coords, isHome) => {
-    // If it's not the home point, then it's the desination
+const changeEndpointLocation = (oldGrid, homeCoords, destCoords, row, col, isHome) => {
+    // If isHome is true, we are moving the home node
+    // Otherwise we are moving the destination node
 
     const newGrid = oldGrid.slice();
-    //newGrid[coords[0]][coords[1]].isWall = false;
 
-    if (isHome) {
-        newGrid[coords[0]][coords[1]].isHome = false;
+    // Make sure that the home and destination coordinates aren't the same
+    if (isHome && !(row === destCoords[0] && col === destCoords[1])) {
+        newGrid[homeCoords[0]][homeCoords[1]].isHome = false;
         newGrid[row][col].isHome = true;
     }
-    else {
-        newGrid[coords[0]][coords[1]].isDest = false;
+    else if (!isHome && !(row === homeCoords[0] && col === homeCoords[1])) {
+        //newGrid[destCoords[0]][destCoords[1]].isDest = false;
+        newGrid[destCoords[0]][destCoords[1]].isDest = false;
         newGrid[row][col].isDest = true;
+    }
+    else {
+        return [newGrid, isHome ? homeCoords : destCoords];
     }
 
     return [newGrid, [row, col]];
