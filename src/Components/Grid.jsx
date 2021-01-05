@@ -226,7 +226,7 @@ class Grid extends Component {
                             return (
                                 <div className="row" key={col}>
                                     {row.map((node, nodeIdx) => {
-                                        const { row, col, isWall, weight, isHome, isDest, isDiscovered } = node;
+                                        const { row, col, isWall, weight, isHome, isDest } = node;
 
                                         return (
                                             <Node key={nodeIdx}
@@ -236,10 +236,8 @@ class Grid extends Component {
                                                 isWeighted={weight !== 1}
                                                 isHome={isHome}
                                                 isDest={isDest}
-                                                isDiscovered={isDiscovered}
                                                 onMouseDown={(row, col) => this.handleMouseDown(row, col)}
                                                 onMouseEnter={(row, col) => this.handleMouseEnter(row, col)}
-                                            // onMouseUp={() => this.handleMouseUp()}
                                             ></Node>
                                         );
                                     })}
@@ -279,7 +277,6 @@ const constructNode = (row, col, homeCoords, destCoords) => {
         isWall: false,
         isHome: row === homeCoords[0] && col === homeCoords[1],
         isDest: row === destCoords[0] && col === destCoords[1],
-        isDiscovered: false,
         parentNode: null
     };
 }

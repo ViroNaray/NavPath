@@ -10,10 +10,8 @@ class Node extends Component {
             isWeighted,
             isHome,
             isDest,
-            isDiscovered,
             onMouseDown,
             onMouseEnter,
-            //onMouseUp
         } = this.props;
 
         const extraClass = isWall ? "node-wall" :
@@ -22,15 +20,13 @@ class Node extends Component {
                     isDest ? "node-dest" :
                         "";
 
-        const discoveredClass = isDiscovered ? "node-discovered" : "";
 
         return (
             <div
                 id={`node-${row}-${col}`}
-                className={`node ${extraClass} ${discoveredClass}`}
+                className={`node ${extraClass}`}
                 onMouseDown={() => onMouseDown(row, col)}
                 onMouseEnter={() => onMouseEnter(row, col)}
-            // onMouseUp={() => onMouseUp()}
             ></div>
         );
     }
