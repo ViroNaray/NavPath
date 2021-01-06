@@ -17,7 +17,7 @@
     animation-delay: 0;
     animation-direction: alternate;
     animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
     animation-play-state: running;
 }
 
@@ -32,7 +32,7 @@
     animation-delay: 0;
     animation-direction: alternate;
     animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
     animation-play-state: running;
 }
 
@@ -58,7 +58,7 @@
     animation-timing-function: ease-out;
     animation-direction: alternate;
     animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
     animation-play-state: running;
 }
   
@@ -95,7 +95,7 @@
     animation-name: endpointAnimation;
     animation-duration: 1.5s;
     animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
     animation-play-state: running;
 }
 
@@ -107,7 +107,7 @@
     animation-name: endpointAnimation;
     animation-duration: 1s;
     animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
     animation-play-state: running;
 }
 
@@ -132,7 +132,7 @@
     animation-timing-function: ease-out;
     animation-direction: alternate;
     animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
     animation-play-state: running;
 }
 
@@ -142,7 +142,7 @@
     animation-timing-function: ease-out;
     animation-direction: alternate;
     animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
     animation-play-state: running;
 }
 
@@ -152,7 +152,7 @@
     animation-timing-function: ease-out;
     animation-direction: alternate;
     animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards; */
     animation-play-state: running;
 }
 
