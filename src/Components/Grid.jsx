@@ -28,7 +28,7 @@ class Grid extends Component {
             movingEndpoints: false, // Only set on mouse down
             movingHome: false,
             homeCoords: [10, 10],
-            destCoords: [10, 11], //44
+            destCoords: [10, 44],
             isSolving: false,
             isSolved: false
         };
@@ -122,7 +122,7 @@ class Grid extends Component {
 
         let nodesDiscoveredInOrder;
 
-        document.getElementById('weight-warning').style.display = (pathfindingMethod <= 1) ? '' : 'none';
+        document.getElementById('weight-warning').style.visibility = (pathfindingMethod <= 1) ? 'visible' : 'hidden';
 
         switch (pathfindingMethod) {
             case 0:
@@ -217,7 +217,7 @@ class Grid extends Component {
                     toggleClick={() => this.setState({ clickSettingIsWall: !this.state.clickSettingIsWall })}
                 ></Buttons>
 
-                <div id="weight-warning" style={{ color: 'red', display: 'none', marginBottom: '5px', zIndex: '10px' }}>This Algorithm ignores weighted nodes</div>
+                <div id="weight-warning" style={{ color: 'red', visibility: 'hidden', marginBottom: '5px', zIndex: '10px' }}>This Algorithm ignores the weights</div>
 
                 <div className="gridContainer">
                     <div className="grid" onMouseLeave={() => this.handleMouseUp()} onMouseUp={() => this.handleMouseUp()}>
