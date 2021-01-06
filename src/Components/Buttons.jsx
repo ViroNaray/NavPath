@@ -24,8 +24,8 @@ function ClearButton(props) {
                 <div className="dropdown">
                     <ul className="dropdown-ul">
                         <li className="dropdown-li" onClick={props.path} >Clear Path</li>
-                        <li className="dropdown-li" onClick={props.walls} title="This will also clear the path">Clear Walls</li>
-                        <li className="dropdown-li" onClick={props.weights} title="This will also clear the path">Clear Weights</li>
+                        <li className="dropdown-li" onClick={props.walls} title="This will also clear the path">Clear Path & Walls</li>
+                        <li className="dropdown-li" onClick={props.weights} title="This will also clear the path">Clear Path & Weights</li>
                         <li className="dropdown-li" onClick={props.all} >Clear All</li>
                     </ul>
                 </div>
