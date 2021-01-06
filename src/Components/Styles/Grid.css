@@ -5,13 +5,13 @@
     width: 100%; */
 
     padding: 10px;
-    position: fixed;
+    /* position: fixed; */
     top: 30%;
     left: 0.5vw;
     right: 0.5vw;
     bottom: 0.5vw;
     overflow-x: scroll;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 
     -webkit-user-select: none;
 }
@@ -24,9 +24,9 @@
     width: fit-content;
 
     /* width: 95vw; */
-    overflow-x: scroll;
-    overflow-y: scroll;
-    max-height: 70vh;
+    /* overflow-x: scroll; */
+    /* overflow-y: scroll; */
+    /* max-height: 70vh; */
 
 }
 
