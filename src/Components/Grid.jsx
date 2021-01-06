@@ -30,7 +30,8 @@ class Grid extends Component {
             homeCoords: [10, 10],
             destCoords: [10, 44],
             isSolving: false,
-            isSolved: false
+            isSolved: false,
+            lastAlgo: null
         };
     }
 
@@ -46,7 +47,7 @@ class Grid extends Component {
 
     handleMouseDown(row, col) {
         // Return if the path is currently being solved
-        if (this.state.isSolving || this.state.isSolved)
+        if (this.state.isSolving)// || this.state.isSolved)
             return;
 
         // Check if we are moving either the Home point or the Destination
@@ -56,6 +57,9 @@ class Grid extends Component {
         }
         else if (this.state.grid[row][col].isDest) {
             this.setState({ mouseIsPressed: true, movingEndpoints: true, movingHome: false });
+            return;
+        }
+        else if (this.state.isSolved) {
             return;
         }
 
@@ -75,7 +79,7 @@ class Grid extends Component {
 
     handleMouseEnter(row, col) {
         // Ignore if we are not dragging or if the path is being solved
-        if (!this.state.mouseIsPressed || this.state.isSolving) {
+        if (!this.state.mouseIsPressed) {// || this.state.isSolving) {
             return;
         }
         // Check if we are moving either the Home point or the Destination
@@ -85,11 +89,27 @@ class Grid extends Component {
 
             if (this.state.movingHome) {
                 [updatedGrid, updatedCoords] = changeEndpointLocation(this.state.grid, this.state.homeCoords, this.state.destCoords, row, col, true);
-                this.setState({ grid: updatedGrid, homeCoords: updatedCoords });
+
+                if (!this.state.isSolved) {
+                    this.setState({ grid: updatedGrid, homeCoords: updatedCoords });
+                }
+                else {
+                    this.setState({ grid: updatedGrid, homeCoords: updatedCoords }, function () {
+                        this.findPath(this.state.lastAlgo, true);
+                    });
+                }
             }
             else {
                 [updatedGrid, updatedCoords] = changeEndpointLocation(this.state.grid, this.state.homeCoords, this.state.destCoords, row, col, false);
-                this.setState({ grid: updatedGrid, destCoords: updatedCoords });
+
+                if (!this.state.isSolved) {
+                    this.setState({ grid: updatedGrid, destCoords: updatedCoords });
+                }
+                else {
+                    this.setState({ grid: updatedGrid, destCoords: updatedCoords }, function () {
+                        this.findPath(this.state.lastAlgo, true);
+                    });
+                }
             }
 
             return;
@@ -113,12 +133,14 @@ class Grid extends Component {
     // 1 - DFS
     // 2 - Dijkstra
     // 3 - A-Star
-    findPath(pathfindingMethod) {
+    findPath(pathfindingMethod, isRedraw = false) {
         if (this.state.isSolving)
             return;
 
         this.clearGrid(0);
-        this.setState({ isSolving: true });
+        if (!isRedraw) {
+            this.setState({ isSolving: true, lastAlgo: pathfindingMethod });
+        }
 
         let nodesDiscoveredInOrder;
 
@@ -149,7 +171,12 @@ class Grid extends Component {
                 return;
         }
 
-        this.animate(nodesDiscoveredInOrder);
+        if (isRedraw) {
+            this.showRedraw(nodesDiscoveredInOrder);
+        }
+        else {
+            this.animate(nodesDiscoveredInOrder);
+        }
 
     }
 
@@ -184,17 +211,42 @@ class Grid extends Component {
     }
 
 
+    showRedraw(nodesDiscoveredInOrder) {
+        for (let i = 0; i < nodesDiscoveredInOrder.length; i++) {
+            const node = nodesDiscoveredInOrder[i];
+            document.getElementById(`node-${node.row}-${node.col}`).classList.add("node-discovered-redrawn");
+        }
+
+        this.showPathRedrawn();
+    }
+
+
+    showPathRedrawn() {
+        const path = backtrackPath(this.state.grid[this.state.destCoords[0]][this.state.destCoords[1]]);
+
+        for (let i = path.length - 1; i >= 0; i--) {
+            const node = path[i];
+            document.getElementById(`node-${node.row}-${node.col}`).classList.add("node-path");
+        }
+    }
+
+
     // type parameter:
     // 0 & ALWAYS - Unvisit all nodes and erase path
     // 1 - Clear Walls
     // 2 - Clear Weights
     // 3 - Clear All
-    clearGrid(type) {
+    clearGrid(type, isButtonAction = false) {
         if (this.state.isSolving)
             return;
 
         const clearedGrid = clearGrid(this.state.grid, type);
-        this.setState({ grid: clearedGrid, isSolved: false });
+        this.setState({ grid: clearedGrid });
+
+        // Reset the lastAlgo if we are clearing by button click
+        if (isButtonAction) {
+            this.setState({ isSolved: false, lastAlgo: null });
+        }
     }
 
 
@@ -209,10 +261,10 @@ class Grid extends Component {
                     showDijkstra={() => this.findPath(2)}
                     showAStar={() => this.findPath(3)}
 
-                    clearPath={() => this.clearGrid(0)}
-                    clearWalls={() => this.clearGrid(1)}
-                    clearWeights={() => this.clearGrid(2)}
-                    clearAll={() => this.clearGrid(3)}
+                    clearPath={() => this.clearGrid(0, true)}
+                    clearWalls={() => this.clearGrid(1, true)}
+                    clearWeights={() => this.clearGrid(2, true)}
+                    clearAll={() => this.clearGrid(3, true)}
 
                     toggleClick={() => this.setState({ clickSettingIsWall: !this.state.clickSettingIsWall })}
                 ></Buttons>
@@ -307,11 +359,15 @@ const changeEndpointLocation = (oldGrid, homeCoords, destCoords, row, col, isHom
         newGrid[row][col].isHome = true;
     }
     else if (!isHome && !(row === homeCoords[0] && col === homeCoords[1])) {
-        //newGrid[destCoords[0]][destCoords[1]].isDest = false;
+        // Make sure the new destination isn't a wall
+        if (newGrid[row][col].isWall) {
+            return [newGrid, destCoords];
+        }
+
         newGrid[destCoords[0]][destCoords[1]].isDest = false;
         newGrid[row][col].isDest = true;
     }
-    else {
+    else { // Return if they overlap
         return [newGrid, isHome ? homeCoords : destCoords];
     }
 
@@ -323,7 +379,7 @@ const changeEndpointLocation = (oldGrid, homeCoords, destCoords, row, col, isHom
 // ALWAYS - Unvisit all nodes and erase path
 //      ALWAYS - Reset starting grid weights -- ignore
 // 1 - Clear Walls
-// 2 - Clear Weights
+// 2 - Clear Weightsw
 // 3 - Clear All
 const clearGrid = (oldGrid, type) => {
     const newGrid = oldGrid.slice();
@@ -333,6 +389,12 @@ const clearGrid = (oldGrid, type) => {
     [].forEach.call(visitedNodes, function (el) {
         el.classList.remove("node-discovered");
     });
+
+    const visitedNodesRedrawn = document.querySelectorAll(".node-discovered-redrawn");
+    [].forEach.call(visitedNodesRedrawn, function (el) {
+        el.classList.remove("node-discovered-redrawn");
+    });
+
 
     // Erase the path
     const pathNodes = document.querySelectorAll(".node-path");
