@@ -15,16 +15,16 @@ class Node extends Component {
         } = this.props;
 
         const extraClass = isWall ? "node-wall" :
-            isWeighted ? "node-weight" :
-                isHome ? "node-home" :
-                    isDest ? "node-dest" :
-                        "";
+            isWeighted ? "node-weight" : "";
+
+        const endpointClass = isHome ? "node-home" :
+            isDest ? "node-dest" : "";
 
 
         return (
             <div
                 id={`node-${row}-${col}`}
-                className={`node ${extraClass}`}
+                className={`node ${extraClass} ${endpointClass}`}
                 onMouseDown={() => onMouseDown(row, col)}
                 onMouseEnter={() => onMouseEnter(row, col)}
             ></div>

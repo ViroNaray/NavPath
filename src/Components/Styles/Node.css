@@ -50,6 +50,51 @@
     }
 }
 
+.node-home {
+    background-image: url("./Images/home.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    background-color: white;
+    outline: 1px solid rgb(241, 165, 93);
+    
+    animation-name: endpointAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    /* animation-fill-mode: forwards; */
+    animation-play-state: running;
+}
+
+.node-dest {
+    background-image: url("./Images/target.png");
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+
+    animation-name: endpointAnimation;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    /* animation-fill-mode: forwards; */
+    animation-play-state: running;
+}
+
+@keyframes endpointAnimation {
+    0% {
+        transform: scale(0.3);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.node-discovered-redrawn {
+    background-color: rgb(79, 148, 238);
+}
+
 .node-discovered {
     background-color: rgb(79, 148, 238);
     
@@ -85,44 +130,6 @@
 
 .node-path {
     background-color: yellow;
-}
-
-.node-home {
-    background-image: url("./Images/home.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    animation-name: endpointAnimation;
-    animation-duration: 1.5s;
-    animation-timing-function: ease-out;
-    /* animation-fill-mode: forwards; */
-    animation-play-state: running;
-}
-
-.node-dest {
-    background-image: url("./Images/target.png");
-    background-repeat: no-repeat;
-    background-size: 25px 25px;
-
-    animation-name: endpointAnimation;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-    /* animation-fill-mode: forwards; */
-    animation-play-state: running;
-}
-
-@keyframes endpointAnimation {
-    0% {
-        transform: scale(0.3);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
 }
 
 /* The following make sure to show the discovered animation regardless of node type */
