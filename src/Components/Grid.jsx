@@ -347,7 +347,7 @@ const clearGrid = (oldGrid, type) => {
         for (let j = 0; j < newGrid[i].length; j++) {
 
             // Reset parents
-            newGrid[i][j].parent = null;
+            newGrid[i][j].parentNode = null;
 
             if (type === 1 || type === 3) // Clear walls
                 newGrid[i][j].isWall = false;
