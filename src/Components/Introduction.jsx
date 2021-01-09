@@ -32,7 +32,7 @@ function Introduction({ closeIntro }) {
                                 <li><b>Breadth-First Search (BFS):</b> an <b>unweighted</b> algorithm that<br />&emsp; guarantees optimality</li>
                                 <li><b>Depth-First Search (DFS):</b> a very inefficient, <b>unweighted</b><br />&emsp; algorithm</li>
                                 <li><b>Dijkstra's Algorithm:</b> a <b>weighted</b> algorithm that<br />&emsp; guarantees optimality</li>
-                                <li><b>A*:</b> an improvement upon Dijkstra's Algorithm</li>
+                                <li><b>A*:</b> a smarter version of Dijkstra's Algorithm</li>
                             </ul>
                         </li>
                         <li>Clear the displayed path, walls, or weights using the "Clear" dropdown<br />&emsp; at the top of the page</li>
