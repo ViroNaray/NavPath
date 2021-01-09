@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Styles/Introduction.css';
 
-function Introduction() {
-    const [isActive, setActive] = useState(true);
-
+function Introduction({ closeIntro }) {
     return (
-        isActive &&
         <div className="intro-container">
             <div>
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => setActive(false)}>
+                <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={closeIntro}>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

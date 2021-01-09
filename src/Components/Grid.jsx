@@ -252,10 +252,13 @@ class Grid extends Component {
 
     render() {
         const { grid } = this.state;
+        const { openIntro } = this.props;
 
         return (
             <>
                 <Buttons
+                    openIntro={openIntro}
+
                     showBFS={() => this.findPath(0)}
                     showDFS={() => this.findPath(1)}
                     showDijkstra={() => this.findPath(2)}
@@ -269,7 +272,7 @@ class Grid extends Component {
                     toggleClick={() => this.setState({ clickSettingIsWall: !this.state.clickSettingIsWall })}
                 ></Buttons>
 
-                <div id="weight-warning" style={{ color: 'red', visibility: 'hidden', marginBottom: '5px', zIndex: '10px' }}>This Algorithm ignores the weights</div>
+                <div id="weight-warning" style={{ color: 'red', visibility: 'hidden', marginBottom: '5px', zIndex: '10px' }}>This Algorithm ignores nodes' weights</div>
 
                 <div className="gridContainer">
                     <div className="grid" onMouseLeave={() => this.handleMouseUp()} onMouseUp={() => this.handleMouseUp()}>

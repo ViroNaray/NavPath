@@ -59,6 +59,8 @@ class Buttons extends Component {
 
     render() {
         const {
+            openIntro,
+
             showBFS,
             showDFS,
             showDijkstra,
@@ -75,7 +77,10 @@ class Buttons extends Component {
         return (
             <div className="header">
                 <div style={{ backgroundColor: '#557A95', top: '0' }}>
-                    <h1 className="header-title">NavPath</h1>
+                    <h1 className="header-title">
+                        NavPath
+                        <div className="info-pic" onClick={openIntro} />
+                    </h1>
 
                     <div style={{ paddingBottom: '1vw' }}>
                         <HeaderButton click={showBFS} text="BFS" />
@@ -93,6 +98,7 @@ class Buttons extends Component {
             </div >
         );
     }
+
 }
 
 export default Buttons;

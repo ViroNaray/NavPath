@@ -68,7 +68,7 @@
 .node-dest {
     background-image: url("./Images/target.png");
     background-repeat: no-repeat;
-    background-size: 25px 25px;
+    background-size: cover;
 
     animation-name: endpointAnimation;
     animation-duration: 1s;
