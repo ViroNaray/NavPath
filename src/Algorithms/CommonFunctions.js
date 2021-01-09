@@ -3,6 +3,9 @@
 function backtrackPath(destinationNode) {
     const reversePath = [];
 
+    if (destinationNode.parentNode === null)
+        return reversePath;
+
     let currNode = destinationNode;
 
     while (currNode != null) {

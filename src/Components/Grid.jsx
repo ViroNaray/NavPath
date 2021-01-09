@@ -59,9 +59,9 @@ class Grid extends Component {
             this.setState({ mouseIsPressed: true, movingEndpoints: true, movingHome: false });
             return;
         }
-        else if (this.state.isSolved) {
-            return;
-        }
+        // else if (this.state.isSolved) {
+        //     return;
+        // }
 
         // Get the new click settings and toggle
         // The new setting is the opposite of whatever the current click mode property is for the clicked node
@@ -73,7 +73,15 @@ class Grid extends Component {
 
 
         const updatedGrid = toggleNodeType(this.state.grid, row, col, newClickSetting, this.state.clickSettingIsWall, this.state.weightMultiplier);
-        this.setState({ grid: updatedGrid, mouseIsPressed: true, clickSettingOn: newClickSetting, movingEndpoints: false });
+
+        if (this.state.isSolved) {
+            this.setState({ grid: updatedGrid, mouseIsPressed: true, clickSettingOn: newClickSetting, movingEndpoints: false }, function () {
+                this.findPath(this.state.lastAlgo, true);
+            });
+        }
+        else {
+            this.setState({ grid: updatedGrid, mouseIsPressed: true, clickSettingOn: newClickSetting, movingEndpoints: false });
+        }
     }
 
 
@@ -120,7 +128,14 @@ class Grid extends Component {
         }
 
         const updatedGrid = toggleNodeType(this.state.grid, row, col, this.state.clickSettingOn, this.state.clickSettingIsWall, this.state.weightMultiplier);
-        this.setState({ grid: updatedGrid });
+        if (!this.state.isSolved) {
+            this.setState({ grid: updatedGrid });
+        }
+        else {
+            this.setState({ grid: updatedGrid }, function () {
+                this.findPath(this.state.lastAlgo, true);
+            });
+        }
     }
 
 
@@ -146,30 +161,45 @@ class Grid extends Component {
 
         document.getElementById('weight-warning').style.visibility = (pathfindingMethod <= 1) ? 'visible' : 'hidden';
 
+        const starterGrid = this.state.grid;
+        let gridWithParents;
+
+        // If the destination is a wall, temporarily remove it
+        let destIsWall = false;
+        if (starterGrid[this.state.destCoords[0]][this.state.destCoords[1]].isWall) {
+            starterGrid[this.state.destCoords[0]][this.state.destCoords[1]].isWall = false;
+            destIsWall = true;
+        }
+
         switch (pathfindingMethod) {
             case 0:
-                nodesDiscoveredInOrder = traditionalSolve(this.state.grid, this.state.homeCoords, this.state.destCoords, true);
+                [nodesDiscoveredInOrder, gridWithParents] = traditionalSolve(starterGrid, this.state.homeCoords, this.state.destCoords, true);
                 break;
 
             case 1:
-                nodesDiscoveredInOrder = traditionalSolve(this.state.grid, this.state.homeCoords, this.state.destCoords, false);
+                [nodesDiscoveredInOrder, gridWithParents] = traditionalSolve(starterGrid, this.state.homeCoords, this.state.destCoords, false);
                 break;
 
             case 2:
-                let gridWithParentsDijkstra;
-                [nodesDiscoveredInOrder, gridWithParentsDijkstra] = dijkstraSolve(this.state.grid, this.state.homeCoords, this.state.destCoords);
-                this.setState({ grid: gridWithParentsDijkstra });
+                [nodesDiscoveredInOrder, gridWithParents] = dijkstraSolve(starterGrid, this.state.homeCoords, this.state.destCoords);
                 break;
 
             case 3:
-                let gridWithParentsAStar;
-                [nodesDiscoveredInOrder, gridWithParentsAStar] = aStarSolve(this.state.grid, this.state.homeCoords, this.state.destCoords);
-                this.setState({ grid: gridWithParentsAStar });
+                [nodesDiscoveredInOrder, gridWithParents] = aStarSolve(starterGrid, this.state.homeCoords, this.state.destCoords);
                 break;
 
             default:
                 return;
         }
+
+        // Remake the destination to a wall if that's how it was initially
+        if (destIsWall) {
+            gridWithParents[this.state.destCoords[0]][this.state.destCoords[1]].isWall = true;
+        }
+
+        // Set the grid with the calculated parents
+        this.setState({ grid: gridWithParents });
+
 
         if (isRedraw) {
             this.showRedraw(nodesDiscoveredInOrder);
@@ -362,11 +392,6 @@ const changeEndpointLocation = (oldGrid, homeCoords, destCoords, row, col, isHom
         newGrid[row][col].isHome = true;
     }
     else if (!isHome && !(row === homeCoords[0] && col === homeCoords[1])) {
-        // Make sure the new destination isn't a wall
-        if (newGrid[row][col].isWall) {
-            return [newGrid, destCoords];
-        }
-
         newGrid[destCoords[0]][destCoords[1]].isDest = false;
         newGrid[row][col].isDest = true;
     }

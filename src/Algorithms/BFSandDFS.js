@@ -2,7 +2,9 @@ import { initDiscoveredGrid } from './CommonFunctions';
 
 // Determins the path between the 2 points using either BFS or DFS
 
-function traditionalSolve(grid, homeCoords, destCoords, useBFS) {
+function traditionalSolve(oldGrid, homeCoords, destCoords, useBFS) {
+    const grid = oldGrid.slice();
+
     // Must contain structures using <row> and <col>
     const nodesVisitedInOrder = [];
 
@@ -37,7 +39,7 @@ function traditionalSolve(grid, homeCoords, destCoords, useBFS) {
         }
     }
 
-    return nodesVisitedInOrder;
+    return [nodesVisitedInOrder, grid];
 }
 
 
