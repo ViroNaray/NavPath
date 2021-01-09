@@ -12,7 +12,7 @@ function App() {
       {showIntro &&
         <Introduction closeIntro={() => setIntroVisibility(false)} />
       }
-      <Grid openIntro={() => setIntroVisibility(true)} />
+      <Grid openIntro={() => setIntroVisibility(!showIntro)} />
     </div>
   );
 }
